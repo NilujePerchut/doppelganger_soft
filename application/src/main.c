@@ -1,0 +1,77 @@
+#include <pic18fregs.h>
+#include "key_map.h"
+#include "debug.h"
+#include "utils.h"
+#include "xnes.h"
+
+#pragma config XINST=OFF
+
+static void SetUsbSource(enum usb_src src) {
+	/* Reset both USB selectors to avoid conflicts */
+	TRISDbits.RD0 = OUTPUT;
+	TRISDbits.RD1 = OUTPUT;
+	TRISDbits.RD2 = OUTPUT;
+	TRISDbits.RD3 = OUTPUT;
+	LED_L = 0;
+	LED_R = 0;
+	USB_SRC_BROOK = 0;
+	USB_SRC_OLDIES = 0;
+	switch (src) {
+		case USB_SOURCE_OLDIES:
+			debug_print("Set oldies mode\r\n");
+			LED_L = 1;
+			LED_R = 0;
+			USB_SRC_OLDIES = 1;
+			USB_SRC_BROOK = 0;
+			break;
+		case USB_SOURCE_BROOK:
+			debug_print("Set brook mode\r\n");
+			LED_L = 0;
+			LED_R = 1;
+			USB_SRC_OLDIES = 0;
+			USB_SRC_BROOK = 1;
+			break;
+		case USB_SOURCE_NONE:
+			break;
+		default:
+			/* Nothing to do */
+			debug_print("Found unknown mode\r\n");
+			break;
+	}
+}
+
+static void IoInit(void)
+{
+	/* Set all input to digital mode */
+	ANSELA = 0x00;
+	ANSELB = 0x00;
+	ANSELC = 0x00;
+	ANSELD = 0x00;
+	ANSELE = 0x00;
+	ADCON1 = 0x0F;		//All pins as digital
+	TRISA = 0xFF;		//set PortA in input
+	TRISB = 0xFF;		//set PortB in input
+	TRISC = 0xFF;		//set PortC in input
+	TRISD = 0xF0;		//set PortD in input
+	TRISE = 0x07;		//set PortE in input
+}
+
+void main(void)
+{
+	IoInit();
+
+	debug_init();
+	debug_print("debug init done\r\n");
+
+	/* Check Oldies sartup condition.
+	 * See key_map.h to change the condition */
+	if (OLDIES_STARTUP) {
+		SetUsbSource(USB_SOURCE_BROOK);
+		while (1); /* Nothing more do to */
+	}
+	SetUsbSource(USB_SOURCE_OLDIES);
+	/* might be needed to wait some time in order for USB swutch to commute */
+
+	/* Detect the oldie's type */
+	xnesApp();
+}

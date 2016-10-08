@@ -1,0 +1,46 @@
+--- a/gputils-1.5.0/header/p18f45k50.inc	2015-11-15 15:20:26.000000000 +0100
++++ b/gputils-1.5.0/header/p18f45k50.inc	2016-10-08 02:06:09.496134408 +0200
+@@ -1959,8 +1959,8 @@
+ ;     IESO = ON            Oscillator Switchover mode enabled
+ ;
+ ;   Power-up Timer Enable:
+-;     nPWRTEN = ON         Power up timer enabled
+-;     nPWRTEN = OFF        Power up timer disabled
++;     PWRTEN = ON          Power up timer enabled
++;     PWRTEN = OFF         Power up timer disabled
+ ;
+ ;   Brown-out Reset Enable:
+ ;     BOREN = OFF          BOR disabled in hardware (SBOREN is ignored)
+@@ -1975,8 +1975,8 @@
+ ;     BORV = 190           BOR set to 1.9V nominal
+ ;
+ ;   Low-Power Brown-out Reset:
+-;     nLPBOR = ON          Low-Power Brown-out Reset enabled
+-;     nLPBOR = OFF         Low-Power Brown-out Reset disabled
++;     LPBOR = ON           Low-Power Brown-out Reset enabled
++;     LPBOR = OFF          Low-Power Brown-out Reset disabled
+ ;
+ ;   Watchdog Timer Enable bits:
+ ;     WDTEN = OFF          WDT disabled in hardware (SWDTEN ignored)
+@@ -2191,8 +2191,8 @@
+ _IESO_ON_1H          EQU  H'FF'    ; Oscillator Switchover mode enabled
+ 
+ ;----- CONFIG2L Options --------------------------------------------------
+-_nPWRTEN_ON_2L       EQU  H'FE'    ; Power up timer enabled
+-_nPWRTEN_OFF_2L      EQU  H'FF'    ; Power up timer disabled
++_PWRTEN_ON_2L       EQU  H'FE'    ; Power up timer enabled
++_PWRTEN_OFF_2L      EQU  H'FF'    ; Power up timer disabled
+ 
+ _BOREN_OFF_2L        EQU  H'F9'    ; BOR disabled in hardware (SBOREN is ignored)
+ _BOREN_ON_2L         EQU  H'FB'    ; BOR controlled by firmware (SBOREN is enabled)
+@@ -2204,8 +2204,8 @@
+ _BORV_220_2L         EQU  H'F7'    ; BOR set to 2.2V nominal
+ _BORV_190_2L         EQU  H'FF'    ; BOR set to 1.9V nominal
+ 
+-_nLPBOR_ON_2L        EQU  H'BF'    ; Low-Power Brown-out Reset enabled
+-_nLPBOR_OFF_2L       EQU  H'FF'    ; Low-Power Brown-out Reset disabled
++_LPBOR_ON_2L        EQU  H'BF'    ; Low-Power Brown-out Reset enabled
++_LPBOR_OFF_2L       EQU  H'FF'    ; Low-Power Brown-out Reset disabled
+ 
+ ;----- CONFIG2H Options --------------------------------------------------
+ _WDTEN_OFF_2H        EQU  H'FC'    ; WDT disabled in hardware (SWDTEN ignored)

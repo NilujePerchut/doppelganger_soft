@@ -1,0 +1,13 @@
+Doppelganger by Niluje
+
+*** Acknowelegemnt ***
+
+Shamelessy stolen from:
+
+Vasco puf:  https://github.com/pgaufillet/vasco for the toolchain installation makefile
+Pinguino:  http://pinguino.cc for the bootloader and some compilation scripts
+m-stack:  for the USB framework
+toodle: for the MC-Cthulu and the UPCB
+
+
+

@@ -1,0 +1,6 @@
+# udev rules file for Doppelganger
+# $Id$
+#
+
+# All Doppelganger devices
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="1807", MODE="660", GROUP="niluje"
