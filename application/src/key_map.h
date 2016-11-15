@@ -25,11 +25,8 @@
 /* This file aims to define correspondance between io pins and controls
  * This mapping is valid against Doppelganger RevA0 */
 
-/* User Controls
- * On RevA0 the pcb overlay is wrong. R3(RA7) and Circle(RC2) are inverted.
- * This is also the case for Square(RC0) and Triangle(RA6).
- * The following code already corrects this */
-#define PCB_SQUARE		PORTAbits.RA7
+/* User Controls*/
+#define PCB_SQUARE		PORTAbits.RA6
 #define PCB_TRIANGLE	PORTCbits.RC0
 #define PCB_CIRCLE		PORTAbits.RA7
 #define PCB_CROSS		PORTAbits.RA4
