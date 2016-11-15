@@ -65,13 +65,14 @@ void main(void)
 
 	/* Check Oldies sartup condition.
 	 * See key_map.h to change the condition */
-	if (OLDIES_STARTUP) {
-		SetUsbSource(USB_SOURCE_BROOK);
+	SetUsbSource(USB_SOURCE_BROOK);
+	debug_print("Essai\r\n");
+	if (!OLDIES_STARTUP) {
+		debug_print("No oldies cdt detected --> Brook mode\r\n");
 		while (1); /* Nothing more do to */
 	}
-	SetUsbSource(USB_SOURCE_OLDIES);
-	/* might be needed to wait some time in order for USB swutch to commute */
 
-	/* Detect the oldie's type */
+	SetUsbSource(USB_SOURCE_OLDIES);
+	debug_print("Oldies startup --> Doppelganger mode\r\n");
 	xnesApp();
 }
