@@ -14,9 +14,12 @@
 #include "key_map.h"
 #include "debug.h"
 #include "utils.h"
+#include "allusb.h"
+#include "ps3usb.h"
 #include "xnes.h"
 #include "saturn.h"
 #include "psx.h"
+#include "ps3usb.h"
 
 #pragma config XINST=OFF
 
@@ -97,6 +100,10 @@ void main(void)
 	} else if (PSX_STARTUP) {
 		LED_L = 1;
 		psxApp();
+	} else if (PC_PS3_STARTUP) {
+		LED_L = 1;
+		SetUsbSource(USB_SOURCE_OLDIES);
+		ps3usbApp();
 	} else {
 		/* Fall back on Brook mode */
 		SetUsbSource(USB_SOURCE_BROOK);

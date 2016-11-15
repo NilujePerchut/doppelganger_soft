@@ -89,5 +89,6 @@ enum usb_src {
 #define XNES_STARTUP	(!PCB_DOWN && !PCB_LEFT)
 #define SATURN_STARTUP	(!PCB_DOWN && !PCB_RIGHT)
 #define PSX_STARTUP		(!PCB_DOWN)
+#define PC_PS3_STARTUP	(!PCB_RIGHT)
 
 #endif

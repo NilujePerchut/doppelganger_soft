@@ -15,6 +15,8 @@ This project currently supports the following systems:
 * Saturn
 * PS1
 * PS2 (not tested yet but must be compatible with PS1)
+* PS3
+* PC
 
 ## Software Usage
 
@@ -23,6 +25,7 @@ This project currently supports the following systems:
 * If the DOWN and LEFT buttons are pressed at startup, the Doppelganger starts in NES/SNES mode
 * If the DOWN and RIGHT buttons are pressed at startup, the Doppelganger starts in Saturn mode
 * If the DOWN button is pressed at startup, the Doppelganger starts in PSX (PS1/PS2) mode
+* If the RIGHT button is pressed at startup, the Doppelganger starts in USB PS3/PC mode
 
 ## RJ45 cabling
 
@@ -36,7 +39,7 @@ SNES/NES:
 | VCC      |        8 | VCC           |
 | GND      |        1 | GND           |
 
-USB:
+USB/PS3/PC/PS3(BROOK)/PS4(BROOK):
 
 | USB pin | RJ45 pin | RJ45 function |
 |---------|----------|---------------|
