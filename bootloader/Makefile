@@ -163,9 +163,9 @@ BOOTEND		= $(shell printf "%x" $(BOOTENDDEC))
 
 # Project name
 ifeq ($(CRYSTAL), INTOSC)
-	PRJ		= Pinguino_Bootloader_v$(MAJ_VER).$(MIN_VER).$(SUB_VER)_$(COMPILER)_$(CPU)_$(CRYSTAL)
+	PRJ		= Doppelganger_Bootloader_v$(MAJ_VER).$(MIN_VER).$(SUB_VER)_$(COMPILER)_$(CPU)_$(CRYSTAL)
 else
-	PRJ		= Pinguino_Bootloader_v$(MAJ_VER).$(MIN_VER).$(SUB_VER)_$(COMPILER)_$(CPU)_X$(CRYSTAL)MHz
+	PRJ		= Doppelganger_Bootloader_v$(MAJ_VER).$(MIN_VER).$(SUB_VER)_$(COMPILER)_$(CPU)_X$(CRYSTAL)MHz
 endif
 
 # C files
