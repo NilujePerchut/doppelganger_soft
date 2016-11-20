@@ -6,6 +6,8 @@
 
 #pragma config XINST=OFF
 
+extern volatile unsigned char sck_count;
+
 static void SetUsbSource(enum usb_src src) {
 	/* Reset both USB selectors to avoid conflicts */
 	TRISDbits.RD0 = OUTPUT;
@@ -40,6 +42,13 @@ static void SetUsbSource(enum usb_src src) {
 	}
 }
 
+void isr_high(void) __interrupt 1
+{
+	/* Only xSNES for the moment */
+	sck_count++;
+	INTCON3bits.INT1IF = 0;
+}
+
 static void IoInit(void)
 {
 	/* Set all input to digital mode */
@@ -66,7 +75,6 @@ void main(void)
 	/* Check Oldies sartup condition.
 	 * See key_map.h to change the condition */
 	SetUsbSource(USB_SOURCE_BROOK);
-	debug_print("Essai\r\n");
 	if (!OLDIES_STARTUP) {
 		debug_print("No oldies cdt detected --> Brook mode\r\n");
 		while (1); /* Nothing more do to */
