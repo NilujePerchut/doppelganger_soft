@@ -1,5 +1,15 @@
 #!/usr/bin/env python
-#-*- coding: iso-8859-15 -*-
+#######################################################################
+#   Title:          Doppelganger
+#   File:           uploader8.py
+#   Descr.:         Bootloader client for the Doppelganger
+#   Stolen from:    Pinguino
+#   Comment:
+#######################################################################
+#	This file is part of Doppelganger:
+#		http://thewireddoesntexist.org/doppelganger
+#	Released under the GPLV3 license (see LICENCE file)
+#######################################################################
 
 #-----------------------------------------------------------------------
 # Usage: uploader8.py path/filename.hex
@@ -15,8 +25,6 @@
 import sys
 import os
 import usb
-#import usb.core
-#import usb.util
 
 # PyUSB Core module switch
 #-----------------------------------------------------------------------
@@ -136,11 +144,11 @@ ERR_EOL                         =    16
 ERR_USB_ERASE                   =    17
 
 # Table with supported USB devices
-# device_id:[PIC name, flash size(in bytes), eeprom size (in bytes)] 
+# device_id:[PIC name, flash size(in bytes), eeprom size (in bytes)]
 #-----------------------------------------------------------------------
 
 devices_table = \
-    {  
+    {
         # 16F
         0x3020: ['16f1454'      , 0x02000, 0x00 ],
         0x3021: ['16f1455'      , 0x02000, 0x00 ],
@@ -161,7 +169,7 @@ devices_table = \
         0x2a60: ['18f2458'      , 0x06000, 0xff ],
         0x4c00: ['18f24j50'     , 0x04000, 0x00 ],
         0x4cc0: ['18lf24j50'    , 0x04000, 0x00 ],
-        
+
         0x1240: ['18f2550'      , 0x08000, 0xff ],
         0x2a40: ['18f2553'      , 0x08000, 0xff ],
         0x4c20: ['18f25j50'     , 0x08000, 0x00 ],
@@ -171,7 +179,7 @@ devices_table = \
 
         0x4c40: ['18f26j50'     , 0x10000, 0x00 ],
         0x4d00: ['18lf26j50'    , 0x10000, 0x00 ],
-        
+
         0x5860: ['18f27j53'     , 0x20000, 0x00 ],
 
         0x1200: ['18f4450'      , 0x04000, 0x00 ],
@@ -179,19 +187,19 @@ devices_table = \
         0x2a20: ['18f4458'      , 0x06000, 0xff ],
         0x4c60: ['18f44j50'     , 0x04000, 0x00 ],
         0x4d20: ['18lf44j50'    , 0x04000, 0x00 ],
-        
+
         0x1200: ['18f4550'      , 0x08000, 0xff ],
         0x2a00: ['18f4553'      , 0x08000, 0xff ],
         0x4c80: ['18f45j50'     , 0x08000, 0x00 ],
         0x4d40: ['18lf45j50'    , 0x08000, 0x00 ],
         0x5C00: ['18f45k50'     , 0x08000, 0xff ],
         0x5C80: ['18lf45k50'    , 0x08000, 0xff ],
-        
+
         0x4ca0: ['18f46j50'     , 0x10000, 0x00 ],
         0x4d60: ['18f46j50'     , 0x10000, 0x00 ],
 
         0x58e0: ['18f47j53'     , 0x20000, 0x00 ],
-        
+
         0x4100: ['18f65j50'     , 0x08000, 0x00 ],
         0x1560: ['18f66j50'     , 0x10000, 0x00 ],
         0x4160: ['18f66j55'     , 0x18000, 0x00 ],
@@ -246,7 +254,7 @@ def initDevice(device):
 
         # The call to set_configuration must come before
         # claim_interface (which, btw, is optional).
-        
+
         try:
             device.set_configuration(ACTIVE_CONFIG)
         except usb.core.USBError as e:
@@ -290,9 +298,9 @@ def closeDevice(handle):
         usb.util.release_interface(handle, INTERFACE_ID)
     else:
         handle.releaseInterface()
-    
+
 # ----------------------------------------------------------------------
-def sendCommand(handle, usbBuf):  
+def sendCommand(handle, usbBuf):
 # ----------------------------------------------------------------------
     """ send command to the bootloader """
 
@@ -338,7 +346,7 @@ def getVersion(handle):
     usbBuf = sendCommand(handle, usbBuf)
     if usbBuf == ERR_USB_WRITE:
         return ERR_USB_WRITE
-    else:        
+    else:
         # major.minor
         return  str(usbBuf[BOOT_VER_MAJOR]) + "." + \
                 str(usbBuf[BOOT_VER_MINOR])
@@ -351,7 +359,7 @@ def getDeviceID(handle, proc):
         PIC16F : 0x8005        """
 
     #print(proc)
-    
+
     if ("16f" in proc):
         # REVISION & DEVICE ID
         usbBuf = readFlash(handle, 0x8005, 4)
@@ -387,10 +395,10 @@ def getDeviceID(handle, proc):
 def getDeviceFlash(device_id):
 # ----------------------------------------------------------------------
     """ get flash memory info """
-    
+
     for n in devices_table:
         if n == device_id:
-            return devices_table[n][1]            
+            return devices_table[n][1]
     return ERR_DEVICE_NOT_FOUND
 
 # ----------------------------------------------------------------------
@@ -432,7 +440,7 @@ def readFlash(handle, address, length):
 
     usbBuf = [0] * MAXPACKETSIZE
     # command code
-    usbBuf[BOOT_CMD] = READ_FLASH_CMD 
+    usbBuf[BOOT_CMD] = READ_FLASH_CMD
     # size of block
     usbBuf[BOOT_CMD_LEN] = length
     # address
@@ -453,7 +461,7 @@ def writeFlash(handle, address, datablock):
 
     usbBuf = [0xFF] * MAXPACKETSIZE
     # command code
-    usbBuf[BOOT_CMD] = WRITE_FLASH_CMD 
+    usbBuf[BOOT_CMD] = WRITE_FLASH_CMD
     # size of block
     usbBuf[BOOT_CMD_LEN] = len(datablock)
     # block's address
@@ -621,7 +629,7 @@ def hexWrite(handle, filename, proc, memstart, memend):
     #print("min_address = 0x%X" % min_address
     #print("max_address = 0x%X" % max_address
 
-    # erase memory from memstart to max_address 
+    # erase memory from memstart to max_address
     # ------------------------------------------------------------------
 
     numBlocksMax = (memend - memstart) / erasedBlockSize
@@ -644,7 +652,7 @@ def hexWrite(handle, filename, proc, memstart, memend):
     else:
         numBlocks = numBlocks - 255
         upperAddress = memstart + 255 * erasedBlockSize
-        # from self.board.memstart to upperAddress 
+        # from self.board.memstart to upperAddress
         status = eraseFlash(handle, memstart, 255)
         if status == ERR_USB_WRITE:
             return ERR_USB_WRITE
@@ -722,7 +730,7 @@ def main(mcu, filename):
     if device_id == ERR_USB_WRITE:
         closeDevice(handle)
         sys.exit("Aborting: unknown device ID")
-        
+
     proc = getDeviceName(device_id)
     if proc == ERR_DEVICE_NOT_FOUND:
         closeDevice(handle)
@@ -765,7 +773,7 @@ def main(mcu, filename):
     print("Uploading user program ...")
     status = hexWrite(handle, filename, proc, memstart, memend)
     #print status
-    
+
     if status == ERR_HEX_RECORD:
         closeDevice(handle)
         sys.exit("Aborting: record error")
@@ -802,10 +810,7 @@ if __name__ == "__main__":
         (sys.version_info[0],
          sys.version_info[1],
          "core" if PYUSB_USE_CORE else "legacy"))
-    i = -1
-    for arg in sys.argv:
-        i = i + 1
-    if i == 2:
-        main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) == 1:
+        main('18f45k50', sys.argv[2])
     else:
-        sys.exit("Usage ex: uploader8.py 16f1459 tools/Blink1459.hex")
+        sys.exit("Usage ex: uploader8.py tools/Blink1459.hex")

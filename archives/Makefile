@@ -1,4 +1,14 @@
-#Build toolchain
+#######################################################################
+#	Title:			Doppelganger
+#	File:			Makefile
+#	Descr.:			Makefile for the Doppelganger toolchain (SDCC + GPUTILS)
+#	Stolen from:	VASCO PUF & Pinguino
+#	Comment:
+#######################################################################
+#	This file is part of Doppelganger:
+#		http://thewireddoesntexist.org/doppelganger
+#	Released under the GPLV3 license (see LICENCE file)
+#######################################################################
 TOOLSDIR = $(shell dirname `pwd`)/toolchain
 export PATH:=$(TOOLSDIR)/bin:$(PATH)
 all: gputils sdcc

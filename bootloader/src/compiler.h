@@ -1,10 +1,13 @@
-/***********************************************************************
-    Title:	USB Pinguino Bootloader
-    File:	compiler.h
-    Descr.: manage compatibility between SDCC and XC8 compiler
-    Author:	Régis Blanchot <rblanchot@gmail.com>
-    This file is part of Pinguino (http://www.pinguino.cc)
-    Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			compiler.h
+	Descr.:			Compiler dependand macros
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 #ifndef _COMPILER_H
@@ -21,7 +24,7 @@
         #ifdef _16F1459
             #define __16f1459
         #endif
-        
+
         #ifdef _18F13K50
             #define __18f13k50
         #endif

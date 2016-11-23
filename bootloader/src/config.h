@@ -1,11 +1,13 @@
-/***********************************************************************
-	Title:	USB Pinguino Bootloader
-	File:	config.h
-	Descr.: configuration bits for supported PIC16F and PIC18F
-	Author:	Régis Blanchot <rblanchot@gmail.com>
-
-	This file is part of Pinguino (http://www.pinguino.cc)
-	Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			config.h
+	Descr.:			PIC18 configuration vectors
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 #include "compiler.h"   // for SDCC and XC8 compatibility

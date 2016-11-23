@@ -1,11 +1,13 @@
-/***********************************************************************
-    Title:  USB Pinguino Bootloader
-    File:   serial.c
-    Descr.: UART functions (useful  for debugging)
-    Author: Régis Blanchot <rblanchot@gmail.com>
-
-    This file is part of Pinguino (http://www.pinguino.cc)
-    Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			serial.c
+	Descr.:			Serial debugging functions
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 #ifndef __SERIAL_C

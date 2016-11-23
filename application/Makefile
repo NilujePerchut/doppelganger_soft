@@ -1,3 +1,15 @@
+#######################################################################
+#	Title:			Doppelganger
+#	File:			Makefile
+#	Descr.:			Makefile for the Doppelganger application
+#	Stolen from:	VASCO PUF & Pinguino
+#	Comment:
+#######################################################################
+#	This file is part of Doppelganger:
+#		http://thewireddoesntexist.org/doppelganger
+#	Released under the GPLV3 license (see LICENCE file)
+#######################################################################
+
 SDCCDIR		= ../toolchain/bin
 COMPILER	= SDCC
 CPU			= 18f45k50

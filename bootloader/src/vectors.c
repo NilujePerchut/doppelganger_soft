@@ -1,20 +1,15 @@
-/***********************************************************************
-    Title:	USB Pinguino Bootloader
-    File:	vectors.c
-    Descr.: move interrupt vectors
-            minimal initialisation routine
-    Author:	Régis Blanchot <rblanchot@gmail.com>
-************************************************************************
-    Changelog
-    * 2015-09-11    RB - added PIC16F interrupt vector
-************************************************************************
-    This file is part of Pinguino (http://www.pinguino.cc)
-    Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
-************************************************************************
-    NB : XC8
-************************************************************************
-    NB : SDCC
-************************************************************************
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			vectors.c
+	Descr.:			PIC interrupt vectors
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
+***********************************************************************/
+/*
 1. The linker needs to know where the call stack should be placed.
     (a) You can use the likes of #pragma stack 0x200 0xff to tell it.
         This approach will emit a udata section placed at 0x200,
@@ -110,7 +105,7 @@ stack) and your project will run only a short while.
 
     /*  never use --ivt-loc=$(ENTRY) to move the vectors
      *  as it will also move the Reset vector from 0 to ENTRY
-     * 
+     *
      *  When generating assembly code for ISR the code generator places
      *  a goto instruction at the Interrupt Vector Address which points at
      *  the generated ISR. When declaring interrupt functions as _naked :
@@ -137,7 +132,7 @@ stack) and your project will run only a short while.
         __endasm;
     }
 
-    // 0x000C (if 0x0000 - 0x0C00 is not protected in the linker file) 
+    // 0x000C (if 0x0000 - 0x0C00 is not protected in the linker file)
 
     void startup(void)
     {
@@ -145,7 +140,7 @@ stack) and your project will run only a short while.
         lfsr    1, _stack_end       ; initialize the stack pointer
         lfsr    2, _stack_end
         __endasm;
-        
+
         main();                     // start bootloader code
 
         __asm
@@ -165,7 +160,7 @@ stack) and your project will run only a short while.
     }
 
     #else
-    
+
     // 0x0004 --> free
 
     // 0x0008

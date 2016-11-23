@@ -1,3 +1,15 @@
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			types.h
+	Descr.:			Some type definitions
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
+***********************************************************************/
+
 #ifndef TYPES_H_
 #define TYPES_H_
 

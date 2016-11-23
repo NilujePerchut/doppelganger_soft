@@ -1,23 +1,14 @@
-/*
- * USB HID Joystick with old consoles support
- *
- * This file may be used by anyone for any purpose and may be used as a
- * starting point making your own application using M-Stack.
- *
- * It is worth noting that M-Stack itself is not under the same license as
- * this file.
- *
- * M-Stack is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  For details, see sections 7, 8, and 9
- * of the Apache License, version 2.0 which apply to this file.  If you have
- * purchased a commercial license for this software from Signal 11 Software,
- * your commerical license superceeds the information in this header.
- *
- * Alan Ott
- * Signal 11 Software
- * 2013-08-13
- */
+/**********************************************************************
+	Title:			Doppelganger
+	File:			xnes.c
+	Descr.:			SNES and NES protocol handlers
+	Stolen from:	UPCB
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
+***********************************************************************/
 
 #include <pic18fregs.h>
 #include <string.h>

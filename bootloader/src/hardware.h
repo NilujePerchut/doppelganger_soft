@@ -1,11 +1,13 @@
-/***********************************************************************
-	Title:	USB Pinguino Bootloader
-	File:	hardware.h
-	Descr.: bootloader def. (version, speed, led, tempo.)
-	Author:	Régis Blanchot <rblanchot@gmail.com>
-
-	This file is part of Pinguino (http://www.pinguino.cc)
-	Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			hardware.h
+	Descr.:			Doppelganger board specific definitions
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 #ifndef _HARDWARE_H

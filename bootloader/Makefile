@@ -1,37 +1,14 @@
-########################################################################
-#                                                                      #
-#	Pinguino Bootloader v4.x                                           #
-#	Microchip 8-bit PIC USB Bootloader                                 #
-#	Author:	Régis Blanchot <rblanchot@gmail.com>                       #
-#           André Gentric                                              #
-#                                                                      #
-#	Usage : make --makefile=Makefile PROC=18f45k50                     #
-#           make --makefile=Makefile PROC=18f2550 OSC=20               #
-#           make --makefile=Makefile PROC=16F1459 OSC=INTOSC           #
-#           make --makefile=Makefile COMP=XC8  PROC=18F47J53 OSC=8     #
-#           make --makefile=Makefile COMP=SDCC PROC=18F26J50 OSC=8     #
-#                                                                      #
-#	This file is part of Pinguino Project (http://www.pinguino.cc)     #
-#	Released under the LGPL license (www.gnu.org/licenses/lgpl.html)   #
-#                                                                      #
-########################################################################
-#	Supported PICs                                                     #
-########################################################################
-#                                                                      #
-#	16F1459                                                            #
-#	18F13k50	18F14k50                                               #
-#	18F2455		18F4455                                                #
-#	18F2550		18F4550                                                #
-#	18F25k50	18F45k50                                               #
-#	18F26j50	18F46j50                                               #
-#	18F26J53	18F46J53                                               #
-#	18F27J53	18F47J53                                               #
-#                                                                      #
-########################################################################
-#	TODO                                                   #
-########################################################################
-#                                                                      #
-########################################################################
+#######################################################################
+#	Title:			Doppelganger Bootloader
+#	File:			Makefile
+#	Descr.:			Makefile for the Doppelganger bootloader
+#	Stolen from:	Pinguino
+#	Comment:
+#######################################################################
+#	This file is part of Doppelganger:
+#		http://thewireddoesntexist.org/doppelganger
+#	Released under the GPLV3 license (see LICENCE file)
+#######################################################################
 
 ########################################################################
 #	PROGRAMMER                                       #

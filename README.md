@@ -1,7 +1,35 @@
 # Doppelganger RevA0
 _Niluje (c) 2016_
 
-Joystick interface to old video game systems.
+Joystick interface to Brook PCB and old video game systems.
+This is the software part of the project, compatible with the Doppelganger board revA0.
+
+## Software Usage
+
+If the Doppelganger board is supplied with no buttons pressed, the brook interface is selected.
+If the UP button is pressed at startup, the Doppelganger starts in bootloader mode.
+If the DOWN, LEFT and L3 buttons are pressed at startup, the Doppelganger starts in legacy video game mode.
+
+## RJ45 cabling
+
+SNES/NES:
+
+| xNES pin | RJ45 pin | RJ45 function |
+|----------|----------|---------------|
+| LATCH    |    7     | /SS           |
+| CLOCK    |    2     | SCK           |
+| DATA     |    4     | SDO           |
+| VCC      |    8     | VCC           |
+| GND      |    1     | GND           |
+
+USB:
+
+| USB pin | RJ45 pin | RJ45 function |
+|---------|----------|---------------|
+| D+      |        6 | D+            |
+| D-      |        5 | D-            |
+| VCC     |        8 | VCC           |
+| GND     |        1 | GND           |
 
 ## Acknowelegement
 

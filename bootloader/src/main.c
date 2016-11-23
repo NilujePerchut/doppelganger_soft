@@ -1,16 +1,13 @@
 /**********************************************************************
-    Title:      Pinguino USB Bootloader
-    File:       main.c
-    Descr.:     8-bit PIC USB bootloader
-    Author:     Régis Blanchot <rblanchot@gmail.com>
-                André Gentric
-    Comment:    Based on Albert Faber's JAL bootloader
-                and Alexander Enzmann's USB Framework
-                see also : http://www.usbmadesimple.co.uk/ums_3.htm
-                https://github.com/majbthrd/pic16f1454-bootloader
+	Title:			Doppelganger Bootloader
+	File:			main.c
+	Descr.:			Bootloader main module
+	Stolen from:	Pinguino
+	Comment:
 ***********************************************************************
-    This file is part of Pinguino (http://www.pinguino.cc)
-    Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 /** --------------------------------------------------------------------

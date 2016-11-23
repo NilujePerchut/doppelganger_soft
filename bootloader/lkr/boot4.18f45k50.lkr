@@ -1,6 +1,14 @@
-// $Id: 18f4550.lkr,v 1.3 2005/03/24 04:17:19 craigfranklin Exp $
-// File: 18f4550.lkr
-// Sample linker script for the PIC18F4550 processor
+///////////////////////////////////////////////////////////////////////
+//	Title:			Doppelganger
+//	File:			boot4.18f45k50.lkr
+//	Descr.:			Linker file for the Doppelganger bootloader
+//	Stolen from:	Pinguino
+//	Comment:
+///////////////////////////////////////////////////////////////////////
+//	This file is part of Doppelganger:
+//		http://thewireddoesntexist.org/doppelganger
+//	Released under the GPLV3 license (see LICENCE file)
+///////////////////////////////////////////////////////////////////////
 
 LIBPATH .
 

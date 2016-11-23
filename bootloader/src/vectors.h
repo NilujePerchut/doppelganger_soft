@@ -1,12 +1,13 @@
-/***********************************************************************
-	Title:	USB Pinguino Bootloader
-	File:	vectors.h
-	Descr.: move interrupt vectors
-            minimal initialisation routine
-	Author:	Régis Blanchot <rblanchot@gmail.com>
-
-	This file is part of Pinguino (http://www.pinguino.cc)
-	Released under the LGPL license (http://www.gnu.org/licenses/lgpl.html)
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			vectors.h
+	Descr.:			PIC interrupt vectors (headers)
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
 ***********************************************************************/
 
 #ifndef _VECTORS_H

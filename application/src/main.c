@@ -1,3 +1,15 @@
+/**********************************************************************
+	Title:			Doppelganger
+	File:			main.c
+	Descr.:			Main program file
+	Stolen from:	No one I can think of
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
+***********************************************************************/
+
 #include <pic18fregs.h>
 #include "key_map.h"
 #include "debug.h"

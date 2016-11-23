@@ -1,21 +1,14 @@
-// Firmware framework for USB I/O on PIC 18F2455 (and siblings)
-// Copyright (C) 2005 Alexander Enzmann
-// 2012 - modified for Pinguino by r.blanchot & a.gentric
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-//
+/**********************************************************************
+	Title:			Doppelganger Bootloader
+	File:			usb.h
+	Descr.:			USB functions (headers)
+	Stolen from:	Pinguino
+	Comment:
+***********************************************************************
+	This file is part of Doppelganger:
+		http://thewireddoesntexist.org/doppelganger
+	Released under the GPLV3 license (see LICENCE file)
+***********************************************************************/
 
 #ifndef _USB_H
 #define _USB_H
@@ -361,14 +354,14 @@ typedef struct
     u8 bInterfaceClass;                 // Class Code (Assigned by USB Org) e.g. HID, communications, mass storage etc.
     u8 bInterfaceSubClass;              // Subclass Code (Assigned by USB Org) 
     u8 bInterfaceProtocol;              // Protocol Code (Assigned by USB Org) 
-    u8 iInterface;                      // Index of String Descriptor Describing this interface 
+    u8 iInterface;                      // Index of String Descriptor Describing this interface
 } USB_Interface_Descriptor;
 
 // Endpoint Descriptor
 typedef struct
 {
-    u8 bLength;                         // Size of Descriptor in Bytes (7 bytes) 
-    u8 bDescriptorType;                 // Endpoint Descriptor (0x05) 
+    u8 bLength;                         // Size of Descriptor in Bytes (7 bytes)
+    u8 bDescriptorType;                 // Endpoint Descriptor (0x05)
     u8 bEndpointAddress;                // Endpoint Address<ul><li>Bits 0..3b Endpoint Number.</li><li>Bits 4..6b Reserved. Set to Zero</li><li>Bits 7 Direction 0 = Out, 1 = In (Ignored for Control Endpoints)</li></ul> 
     u8 bmAttributes;                    // Bits 0..1 Transfer Type
                                         //  * 00 = Control
@@ -386,9 +379,9 @@ typedef struct
                                         //  * 00 = Data Endpoint
                                         //  * 01 = Feedback Endpoint
                                         //  * 10 = Explicit Feedback Data Endpoint
-                                        //  * 11 = Reserved 
-    u16 wMaxPacketSize;                 // Maximum Packet Size this endpoint is capable of sending or receiving 
-    u8 bInterval;                       // Interval for polling endpoint data transfers. Value in frame counts. Ignored for Bulk & Control Endpoints. Isochronous must equal 1 and field may range from 1 to 255 for interrupt endpoints. 
+                                        //  * 11 = Reserved
+    u16 wMaxPacketSize;                 // Maximum Packet Size this endpoint is capable of sending or receiving
+    u8 bInterval;                       // Interval for polling endpoint data transfers. Value in frame counts. Ignored for Bulk & Control Endpoints. Isochronous must equal 1 and field may range from 1 to 255 for interrupt endpoints.
 } USB_Endpoint_Descriptor;
 
 // Pinguino own Configuration Descriptor
