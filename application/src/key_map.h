@@ -36,15 +36,37 @@
 #define PCB_HOME		PORTAbits.RA0
 #define PCB_DISABLE		PORTAbits.RA1
 
+/* Std PS3 controller mapping */
+#define STD_START		PCB_START
+#define STD_SELECT		PCB_SELECT
+#define STD_UP			PCB_UP
+#define STD_DOWN		PCB_DOWN
+#define STD_LEFT		PCB_LEFT
+#define STD_RIGHT		PCB_RIGHT
+#define STD_LP			PCB_SQUARE
+#define STD_MP			PCB_TRIANGLE
+#define STD_HP			PCB_R1
+#define STD_3P			PCB_L1
+#define STD_LK			PCB_CROSS
+#define STD_MK			PCB_CIRCLE
+#define STD_HK			PCB_R2
+#define STD_3K			PCB_L2
+
 /* Serial interface */
 #define SERIAL_CS		PORTAbits.RA5
 #define SERIAL_SDI		PORTBbits.RB0
-#define SERIAL_SDO		LATBbits.LATB3
+#define SERIAL_SDO		PORTBbits.RB3
 #define SERIAL_SCK		PORTBbits.RB1
 #define SERIAL_CS_TRIS	TRISAbits.RA5
 #define SERIAL_SDI_TRIS	TRISBbits.RB0
 #define SERIAL_SDO_TRIS	TRISBbits.RB3
 #define SERIAL_SCK_TRIS	TRISBbits.RB1
+
+/* USB interface */
+#define USB_N			PORTAbits.RA2
+#define USB_P			PORTAbits.RA3
+#define USB_N_TRIS		TRISAbits.RA2
+#define USB_P_TRIS		TRISAbits.RA3
 
 /* LEDs */
 #define LED_L			LATDbits.LATD0
