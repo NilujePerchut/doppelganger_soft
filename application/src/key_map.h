@@ -86,6 +86,7 @@ enum usb_src {
 #define OUTPUT			0
 
 /* This macro defines the key condition used to disable the brook at startup */
-#define OLDIES_STARTUP	(!PCB_DOWN && !PCB_LEFT && !PCB_L3)
+#define XNES_STARTUP	(!PCB_DOWN && !PCB_LEFT)
+#define SATURN_STARTUP	(!PCB_DOWN && !PCB_RIGHT)
 
 #endif

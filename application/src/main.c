@@ -15,6 +15,7 @@
 #include "debug.h"
 #include "utils.h"
 #include "xnes.h"
+#include "saturn.h"
 
 #pragma config XINST=OFF
 
@@ -82,17 +83,19 @@ void main(void)
 	IoInit();
 
 	debug_init();
-	debug_print("debug init done\r\n");
 
-	/* Check Oldies sartup condition.
-	 * See key_map.h to change the condition */
-	SetUsbSource(USB_SOURCE_BROOK);
-	if (!OLDIES_STARTUP) {
-		debug_print("No oldies cdt detected --> Brook mode\r\n");
-		while (1); /* Nothing more do to */
+	/* Disable USB by default */
+	SetUsbSource(USB_SOURCE_NONE);
+
+	if (XNES_STARTUP) {
+		LED_L = 1;
+		xnesApp();
+	} else if (SATURN_STARTUP) {
+		LED_L = 1;
+		saturnApp();
+	} else {
+		/* Fall back on Brook mode */
+		SetUsbSource(USB_SOURCE_BROOK);
+		while(1); /* Just wait here forever */
 	}
-
-	SetUsbSource(USB_SOURCE_OLDIES);
-	debug_print("Oldies startup --> Doppelganger mode\r\n");
-	xnesApp();
 }
