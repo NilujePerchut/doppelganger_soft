@@ -16,7 +16,7 @@ CPU			= 18f45k50
 APPSTART	= 0xC00
 
 ARCH	= pic16
-OPTIMIZ	= --optimize-df --optimize-cmp --obanksel=9 --denable-peeps
+OPTIMIZ	= --optimize-df --optimize-cmp --obanksel=9 --denable-peeps --opt-code-speed --peep-asm
 
 # C files
 SRCS		= $(wildcard src/*.c)
