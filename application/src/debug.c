@@ -57,7 +57,7 @@ void debug_print(const char *str)
 #define TO_HEX(i) (i <= 9 ? '0' + i : 'A' - 10 + i)
 void debug_print_val(unsigned short c)
 {
-	char str[7];
+	char str[5];
 	unsigned char tmp;
 
 	tmp = (c & 0xF000)>>12;
@@ -68,9 +68,7 @@ void debug_print_val(unsigned short c)
 	str[2] = TO_HEX(tmp);
 	tmp = c & 0x000F;
 	str[3] = TO_HEX(tmp);
-	str[4] = '\r';
-	str[5] = '\n';
-	str[6] = '\0';
+	str[4] = '\0';
 
 	debug_print(str);
 }
