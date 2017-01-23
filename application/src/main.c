@@ -16,6 +16,7 @@
 #include "utils.h"
 #include "xnes.h"
 #include "saturn.h"
+#include "psx.h"
 
 #pragma config XINST=OFF
 
@@ -93,6 +94,9 @@ void main(void)
 	} else if (SATURN_STARTUP) {
 		LED_L = 1;
 		saturnApp();
+	} else if (PSX_STARTUP) {
+		LED_L = 1;
+		psxApp();
 	} else {
 		/* Fall back on Brook mode */
 		SetUsbSource(USB_SOURCE_BROOK);

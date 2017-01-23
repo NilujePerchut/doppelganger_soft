@@ -13,6 +13,8 @@ This project currently supports the following systems:
 * NES
 * SNES
 * Saturn
+* PS1
+* PS2 (not tested yet but must be compatible with PS1)
 
 ## Software Usage
 
@@ -20,6 +22,7 @@ This project currently supports the following systems:
 * If the UP button is pressed at startup, the Doppelganger starts in bootloader mode.
 * If the DOWN and LEFT buttons are pressed at startup, the Doppelganger starts in NES/SNES mode
 * If the DOWN and RIGHT buttons are pressed at startup, the Doppelganger starts in Saturn mode
+* If the DOWN button is pressed at startup, the Doppelganger starts in PSX (PS1/PS2) mode
 
 ## RJ45 cabling
 
@@ -56,6 +59,20 @@ SATURN:
 | GND        |        1 | GND           |
 
 Note: the Saturn support needs a hardware bug fix. Please refer to the hardware project bug 2.
+
+PSX (PS1/PS2):
+
+| PSX pin | RJ45 pin | RJ45 function |
+|---------|----------|---------------|
+| ACK     |        5 | D-   	     |
+| CLOCK   |        2 | SCK           |
+| DATA    |        4 | SDO           |
+| ATT     |        7 | /SS           |
+| COMMAND |        3 | SDI           |
+| VCC     |        8 | VCC           |
+| GND     |        1 | GND           |
+
+Note: the PSX support needs a hardware bug fix. Please refer to the hardware project bug 3.
 
 ## Acknowelegement
 

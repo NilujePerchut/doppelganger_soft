@@ -88,5 +88,6 @@ enum usb_src {
 /* This macro defines the key condition used to disable the brook at startup */
 #define XNES_STARTUP	(!PCB_DOWN && !PCB_LEFT)
 #define SATURN_STARTUP	(!PCB_DOWN && !PCB_RIGHT)
+#define PSX_STARTUP		(!PCB_DOWN)
 
 #endif
