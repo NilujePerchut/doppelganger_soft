@@ -122,8 +122,10 @@ static void snesFillMap(void)
 	}
 
 	/* Common */
-	mapping[2] = PCB_SELECT; /* SELECT */
-	mapping[3] = PCB_START; /* START */
+	if (!PCB_DISABLE) {
+		mapping[2] = PCB_SELECT; /* SELECT */
+		mapping[3] = PCB_START; /* START */
+	}
 	mapping[4] = PCB_UP; /* UP */
 	mapping[5] = PCB_DOWN; /* DOWN */
 	mapping[6] = PCB_LEFT; /* LEFT */
@@ -179,8 +181,14 @@ static void process_nes(void)
 		while (1) { //Now just buffer the inputs until we're latched again
 			bA=PCB_CIRCLE; if (XNES_LATCH) break;
 			bB=PCB_CROSS; if (XNES_LATCH) break;
-			bSe=PCB_SELECT; if (XNES_LATCH) break;
-			bSt=PCB_START; if (XNES_LATCH) break;
+
+			if (!PCB_DISABLE) {
+				bSe=PCB_SELECT; if (XNES_LATCH) break;
+				bSt=PCB_START; if (XNES_LATCH) break;
+			} else {
+				bSe=1; if (XNES_LATCH) break;
+				bSt=1; if (XNES_LATCH) break;
+			}
 			bU=PCB_UP; if (XNES_LATCH) break;
 			bD=PCB_DOWN; if (XNES_LATCH) break;
 			bL=PCB_LEFT; if (XNES_LATCH) break;

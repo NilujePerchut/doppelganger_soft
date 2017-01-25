@@ -79,7 +79,11 @@ static inline void naive_approch(void)
 		if ((PORTA & SELECT_MASK) != CYCLE_LH) {
 			STATE_RECHECK
 		}
-		FILL_NEXT(PCB_CIRCLE, PCB_R2, PCB_CROSS, PCB_START);
+		if (!PCB_DISABLE)
+			FILL_NEXT(PCB_CIRCLE, PCB_R2, PCB_CROSS, PCB_START);
+		else
+			FILL_NEXT(PCB_CIRCLE, PCB_R2, PCB_CROSS, 1);
+
 		while((PORTA & SELECT_MASK) == CYCLE_LH);
 	DO_HL:
 		APPLY_LATS;

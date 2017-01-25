@@ -85,13 +85,13 @@ static void psx_main(void)
 
 		/* Map the first button byte */
 		buttons = 0xFF;
-		if (!PCB_SELECT)
+		if (!PCB_SELECT && !PCB_DISABLE)
 			buttons &= 0x7F;
 		if (!PCB_L3)
 			buttons &= 0xBF;
 		if (!PCB_R3)
 			buttons &= 0xDF;
-		if (!PCB_START)
+		if (!PCB_START && !PCB_DISABLE)
 			buttons &= 0xEF;
 		if (!PCB_UP)
 			buttons &= 0xF7;
