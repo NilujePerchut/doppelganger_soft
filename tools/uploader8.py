@@ -729,7 +729,7 @@ if __name__ == "__main__":
     print("We use Python v%d.%d + PyUSB.%s" %
           (sys.version_info[0], sys.version_info[1],
            "core" if PYUSB_USE_CORE else "legacy"))
-    if len(sys.argv) == 1:
-        sys.exit(main('18f45k50', sys.argv[2]))
+    if len(sys.argv) == 2:
+        sys.exit(main('18f45k50', sys.argv[1]))
     else:
         sys.exit("Usage ex: uploader8.py tools/Blink1459.hex")
