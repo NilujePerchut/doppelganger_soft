@@ -14,3 +14,4 @@
 #define SYSTEM_PERIPH_FREQUENCY (SYSTEM_CPU_FREQUENCY>>2)
 
 void delayms(unsigned short milliseconds);
+int timeout(void (*f)(void), unsigned short milliseconds);

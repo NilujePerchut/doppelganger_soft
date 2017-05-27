@@ -1,7 +1,6 @@
 /**********************************************************************
 	Title:			Doppelganger
-	File:			main.c
-	Descr.:			Main program file
+	File:			main.c Descr.:			Main program file
 	Stolen from:	No one I can think of
 	Comment:
 ***********************************************************************
@@ -61,9 +60,24 @@ static void SetUsbSource(enum usb_src src) {
 
 void isr_high(void) __interrupt 1
 {
-	/* Only xSNES for the moment */
-	sck_count++;
-	INTCON3bits.INT1IF = 0;
+	if (INTCON3bits.INT1IF) {
+		/* Only xSNES for the moment */
+		sck_count++;
+		INTCON3bits.INT1IF = 0;
+	} else if (INTCONbits.TMR0IF) {
+		INTCONbits.TMR0IF = 0;
+
+		/* Detection timer expires. Just pop off the ISR return address from
+		 * the stack to return to the timeout call. This must be done with
+		 * interruption disabled */
+		INTCONbits.GIE = 0;
+		__asm
+			pop
+			/* pop */
+		__endasm;
+		INTCONbits.GIE = 1;
+		/* Should return to the next instruction following the timeout call */
+	}
 }
 
 static void IoInit(void)
@@ -80,6 +94,24 @@ static void IoInit(void)
 	TRISC = 0xFF;		//set PortC in input
 	TRISD = 0xF0;		//set PortD in input
 	TRISE = 0x07;		//set PortE in input
+}
+
+int detect_process(void)
+{
+	/* This is the system detection function. Since some system take several
+	 * seconds to start sending something on their controller port, let order
+	 * the detection to maximize the number of systems in the smallest amount
+	 * of time */
+
+	/* NES/SNES */
+
+	/* USB */
+
+	/* PSX */
+
+	/* Saturn */
+
+	return -1;
 }
 
 void main(void)
