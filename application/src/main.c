@@ -24,7 +24,8 @@
 
 extern volatile unsigned char sck_count;
 
-static void SetUsbSource(enum usb_src src) {
+static void SetUsbSource(enum usb_src src)
+{
 	/* Reset both USB selectors to avoid conflicts */
 	TRISDbits.RD0 = OUTPUT;
 	TRISDbits.RD1 = OUTPUT;
@@ -98,16 +99,21 @@ static void IoInit(void)
 
 int detect_process(void)
 {
-	/* This is the system detection function. Since some system take several
+	/* This is the system detection function. Since some systems take several
 	 * seconds to start sending something on their controller port, let order
 	 * the detection to maximize the number of systems in the smallest amount
 	 * of time */
+	int res;
 
 	/* NES/SNES */
+	res = xnesAutoDetect();
+	IoInit();
+	if (res)
+		return res;
 
 	/* USB */
 
-	/* PSX */
+	/* PS1/PS2 */
 
 	/* Saturn */
 
@@ -116,6 +122,8 @@ int detect_process(void)
 
 void main(void)
 {
+	int res;
+
 	IoInit();
 
 	debug_init();
@@ -123,6 +131,7 @@ void main(void)
 	/* Disable USB by default */
 	SetUsbSource(USB_SOURCE_NONE);
 
+	/* If a mode is forced got for it */
 	if (XNES_STARTUP) {
 		LED_L = 1;
 		xnesApp();
@@ -137,8 +146,18 @@ void main(void)
 		SetUsbSource(USB_SOURCE_OLDIES);
 		ps3usbApp();
 	} else {
-		/* Fall back on Brook mode */
-		SetUsbSource(USB_SOURCE_BROOK);
-		while(1); /* Just wait here forever */
+		/* First go for autodetection */
+		res = detect_process();
+		switch (res) {
+			case FOUND_XNES:
+				LED_L = 1;
+				xnesApp();
+				break;
+			case -1:
+			default:
+				/* Fall back on Brook mode if autodetection failed */
+				SetUsbSource(USB_SOURCE_BROOK);
+				while(1); /* Just wait here forever */
+		}
 	}
 }

@@ -15,10 +15,12 @@
 #include "debug.h"
 #include "key_map.h"
 #include "xnes.h"
+#include "utils.h"
 
 unsigned char type;
 unsigned char type_max;
 volatile unsigned char sck_count;
+extern volatile int timeout_result;
 unsigned char mapping[XNES_MAX_KEYS];
 
 static void xnesInitPins(void)
@@ -33,6 +35,57 @@ static void xnesInitPins(void)
 	INTCONbits.GIE = 0;
 }
 
+static void xnesAutoDetectBlocking(void)
+{
+	/* Wait for the intial latch pulse */
+	while(XNES_LATCH);
+	while(!XNES_LATCH);
+	while(XNES_LATCH);
+	sck_count = 0;
+	INTCONbits.GIE = 1;
+	/* Wait for the latch pulse that starts the next period*/
+	while (!XNES_LATCH);
+	timeout_result = 1;
+}
+
+int xnesAutoDetect(void)
+{
+	int res;
+
+	debug_print("Enters xnesAutodetect\r\n");
+
+	xnesInitPins();
+
+	/* Configure the INT1 interruption */
+	INTCON2bits.INTEDG1 = 1; /* Rising Edge of INT1*/
+	INTCON3bits.INT1IE = 1; /* Enables INT1 */
+	INTCON3bits.INT1P = 1; /* High priority */
+	INTCON3bits.INT1IF = 0; /* Reset the interrupt flag if present */
+
+	res = timeout(xnesAutoDetectBlocking, XNES_AUTO_DETECT_TIMEOUT_MS);
+
+	INTCON3bits.INT1IE = 0; /* Enables INT1 */
+	INTCONbits.GIE = 0;
+	INTCON3bits.INT1IF = 0;
+
+	if (!res) {
+		/* Timeout expired */
+		debug_print("Exit xnesAutodetect with timeout\r\n");
+		return -1;
+	}
+
+	switch(sck_count) {
+		case XNES_SNES_KEY_NUM:
+		case XNES_NES_KEY_NUM:
+			debug_print("Exit xnesAutodetect successfully: ");
+			debug_print_val(sck_count);
+			debug_print("\r\n");
+			return FOUND_XNES;
+		default:
+			return -1;
+	}
+}
+
 static void xnesDetect(void)
 {
 	unsigned char tries;
@@ -40,41 +93,46 @@ static void xnesDetect(void)
 	type = XNES_TYPE_UNDETECTED;
 
 	/* Configure the INT1 interruption */
+	INTCONbits.GIE = 0;
 	INTCON2bits.INTEDG1 = 1; /* Rising Edge of INT1*/
 	INTCON3bits.INT1IE = 1; /* Enables INT1 */
+	INTCON3bits.INT1IF = 0; /* Reset the interrupt flag if present */
 	INTCON3bits.INT1P = 1; /* High priority */
 
 	/* Wait for latch pulse */
 	tries = 0;
 	while ((XNES_TYPE_UNDETECTED == type) && (tries<DETECT_TRIALS_MAX)){
 		debug_print("Wait pulse\r\n");
+		sck_count = 0;
 		while(XNES_LATCH);
 		while(!XNES_LATCH);
 		while(XNES_LATCH);
 
 		/* Try a new version with interruptions */
-		sck_count = 0;
 		INTCONbits.GIE = 1;
 		/* Wait a cycle and count the number of clk ticks */
 		while (!XNES_LATCH);
 		INTCONbits.GIE = 0;
+		INTCON3bits.INT1IE = 0; /* Disables INT1 */
 
 		debug_print("Exits detect loop for ");
 		debug_print_val(sck_count);
+		debug_print("\r\n");
 		switch(sck_count) {
-			case (XNES_SNES_KEY_NUM):
+			case XNES_SNES_KEY_NUM:
 				debug_print("Found SNES\r\n");
 				type = XNES_TYPE_SNES;
 				type_max = XNES_SNES_KEY_NUM;
 				break;
-			case (XNES_NES_KEY_NUM):
+			case XNES_NES_KEY_NUM:
 				debug_print("Found NES\r\n");
 				type = XNES_TYPE_NES;
 				type_max = XNES_NES_KEY_NUM;
 				break;
 			default:
-				debug_print("Found unknown\r\n");
+				debug_print("Found unknown: ");
 				debug_print_val(sck_count);
+				debug_print("\r\n");
 				type = XNES_TYPE_UNDETECTED;
 				type_max = 0;
 				break;
